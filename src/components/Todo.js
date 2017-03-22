@@ -5,7 +5,7 @@ const ToDo = ({id, text, completed, toggleTodo}) => {
     textDecoration: "line-through",
   };
   return (
-    <li onClick={toggleTodo.bind(null, id)}
+    <li onClick={onTodoClick.bind(null, id)}
       style={completed ? completedStyle : null }>
     {text}</li>
   );
@@ -15,7 +15,7 @@ ToDo.propTypes = {
   id: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   completed: PropTypes.bool.isRequired,
-  toggleTodo: PropTypes.func.isRequired,
+  onTodoClick: PropTypes.func.isRequired,
 };
 
 export default ToDo;

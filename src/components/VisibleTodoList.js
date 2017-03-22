@@ -2,34 +2,30 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router";
 import {toggleTodo} from "../actions";
 import ToDoList from "./TodoList";
-
-const getVisibleTodos = (todos, filter) => {
-  switch(filter) {
-    case "all":
-      return todos;
-    case "active":
-      return todos.filter(t => !t.completed);
-    case "completed":
-      return todos.filter(t => t.completed);
-    default:
-      return todos;
-  }
-}
+import {getVisibleTodos} from "../reducers";
 
 
 const mapStateToProps = (state, {params}) => ({
-  todos: getVisibleTodos(state.todos, params.filter || "all"),
+  todos: getVisibleTodos(state, params.filter || "all"),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  toggleTodo(id) {
-    dispatch(toggleTodo(id));
-  }
-});
+// As mapDispatchToProps takes a dispatch function in params
+// and set prop 'onTodoClick' on ToDoList. This props is a
+// function that calls store.dispatch with action object.
+// The action object needs ID, so 'onTodoClick' is call with
+// param 'id', so instead of using mapDispatchToProps we can
+// shothand it with {onTodoClick: toggleTodo}
+// {propToCreate: ActionHelper}
+
+//const mapDispatchToProps = (dispatch) => ({
+//  onTodoClick(id) {
+//    dispatch(toggleTodo(id));
+//  }
+//});
 
 const VisibleTodoList = withRouter(connect(
   mapStateToProps,
-  mapDispatchToProps,
+  {onTodoClick: toggleTodo},
 )(ToDoList));
 
 export default VisibleTodoList;
