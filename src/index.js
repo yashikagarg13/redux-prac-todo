@@ -1,25 +1,10 @@
 import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import todoApp from './reducers';
-import App from './components/App';
-import {loadState, saveState} from "./localStorage";
-import throttle from "lodash/throttle";
-
-const initialState = loadState();
-
-const store = createStore(todoApp, initialState);
-console.log(store.getState());
-
-store.subscribe(throttle(() => {
-  saveState({todos: store.getState().todos});
-}, 1000));
+import configureStore from "./configureStore";
+import Root from "./components/Root";
 
 render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <Root store={configureStore()} />,
   document.getElementById('root')
 );
