@@ -1,7 +1,7 @@
 import React, {PropTypes} from "react";
 import ToDo from "./todo";
 
-const ToDoList = ({todos, toggleTodo}) => {
+const ToDoList = ({todos, onTodoClick}) => {
   return (
     <ul>
       {todos.map(todo =>

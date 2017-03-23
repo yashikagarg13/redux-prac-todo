@@ -23,10 +23,10 @@ const allIds = (state = [], action) => {
   }
 }
 
-const todos = combineReducers(
+const todos = combineReducers({
   byId, // ===> Object of todos
   allIds // ===> Ids of todods
-);
+});
 
 const getAllTodos = (state) => state.allIds.map(id => state.byId[id]);
 

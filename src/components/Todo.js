@@ -1,6 +1,6 @@
 import React, {PropTypes} from "react";
 
-const ToDo = ({id, text, completed, toggleTodo}) => {
+const ToDo = ({id, text, completed, onTodoClick}) => {
   const completedStyle = {
     textDecoration: "line-through",
   };
