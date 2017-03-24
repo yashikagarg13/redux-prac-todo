@@ -22,10 +22,10 @@ const fakeDatabase = {
 const delay = (ms) =>
   new Promise(resolve => setTimeout(resolve, ms));
 
-export const fetchTodos = (filter) =>
-  throw "Error";
+export const fetchTodos = (filter) => {
+  return delay(1000).then(() => {
+    throw new Error('Boom!');
 
-  delay(5000).then(() => {
     switch (filter) {
       case 'all':
         return fakeDatabase.todos;
@@ -37,3 +37,4 @@ export const fetchTodos = (filter) =>
         throw new Error(`Unknown filter: ${filter}`);
     }
   });
+}
