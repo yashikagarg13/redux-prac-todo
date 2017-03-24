@@ -1,11 +1,14 @@
 import { createStore, applyMiddleware } from 'redux';
-import promise from "redux-promise";
 import createLogger from "redux-logger";
+import thunk from "redux-thunk";
 import throttle from "lodash/throttle";
 import todoApp from './reducers';
 
 
 /*
+
+import promise from "redux-promise";
+
 // Middlewares here are functions returning a function;
 const logger = (store) => (next) => {
   if (!console.group) {
@@ -31,6 +34,11 @@ const promise = (store) => (next) => (action) => {
   return next(action);
 }
 
+const thunk = (store) => (next) => (action) =>
+  (typeof action === "function")
+  ? action(store.dispatch, store.getState)
+  : next(action);
+
 const wrapDispatchWithMiddlewares = (store, middlewares) =>
   middlewares.reverse().reduce((dispatch, middleware) => {
     dispatch = middleware(store)(store.dispatch);
@@ -38,8 +46,9 @@ const wrapDispatchWithMiddlewares = (store, middlewares) =>
   }, store.dispatch);*/
 
 
+
 const configureStore = () => {
-  const middlewares = [promise]; // redux-promise similar to promise middle ware above
+  const middlewares = [thunk]; // redux-promise similar to promise middle ware above
   if (process.env.NODE_ENV !== "production") {
     middlewares.push(createLogger()); // createLogger() similar middleware like logger
   }
