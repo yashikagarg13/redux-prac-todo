@@ -39,7 +39,8 @@ class VisibleTodoList extends Component {
 
     return (
       <ToDoList
-        todos={todos}/>
+        todos={todos}
+        onTodoClick={toggleTodo}/>
     );
   }
 }
