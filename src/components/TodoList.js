@@ -8,7 +8,7 @@ const ToDoList = ({todos, onTodoClick}) => {
        <ToDo
          key={todo.id}
          {...todo}
-         onTodoClick={onTodoClick} />
+         onTodoClick={() => {}} />
       )}
     </ul>
   );
@@ -16,7 +16,6 @@ const ToDoList = ({todos, onTodoClick}) => {
 
 ToDoList.PropTypes = {
   todos: PropTypes.array.isRequired,
-  onTodoClick: PropTypes.func.isRequired,
 };
 
 export default ToDoList;
